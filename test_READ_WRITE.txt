@@ -1,0 +1,12 @@
+VAR
+    n,p,w,s,t,l
+BEGIN
+    READ p;
+    READ w;
+    
+    REPEAT 
+        p ASSIGN p MINUS 1;
+        WRITE w;
+    UNTIL p LE w;
+    
+END

@@ -1,0 +1,5 @@
+lazy_vm
+~/Pobrane/labor4/maszyna_wirtualna$ ./maszyna-wirtualna  /home/weronika/Pulpit/Kompilator/test_output.txt
+
+lazy_vs code
+/bin/python3 /home/weronika/Pulpit/Kompilator/parser.py /home/weronika/Pulpit/Kompilator/test_READ_WRITE.txt /home/weronika/Pulpit/Kompilator/test_output.txt
