@@ -31,6 +31,11 @@ class WriteCommand(BaseCommand):
             self.code = load_value_to_registry(
                 self.variable, "a","b")
             self.code.append("PUT")
+        elif type(self.variable) == VariableOfArray:
+            self.code = load_value_to_registry(
+                self.variable, "a")
+            # Location of var in "a"
+            self.code.append("PUT")
 
 class ReadCommand(BaseCommand):
     def __init__(self,variable):
@@ -51,12 +56,16 @@ class AssignCommand(BaseCommand):
         self.code = []
 
     def generate_code(self, registry="d"):
+        self.code = self.expression.generate_code("a","b")
+        self.code.append("SWAP d")
         if type(self.variable) == VariableOfArray:
-            pass
+            
+            self.code.extend(load_value_to_registry(
+                self.variable, "a", do_variablearray_memory=True))
         else:
-            self.code = load_value_to_registry(
-                self.variable.memory_number, "d", "c")
-        self.code.extend(self.expression.generate_code("a","b"))
+            self.code.extend(load_value_to_registry(
+                self.variable.memory_number, "a", "b"))
+        self.code.append("SWAP d")
         self.code.append("STORE d")
 
 class IfCommand(BaseCommand):

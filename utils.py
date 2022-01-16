@@ -39,17 +39,48 @@ def generate_number(number: int, registry, second_registry):
             code.append("SWAP " + registry)
     return code
 
-def load_value_to_registry(value,registry,second_registry):
+def load_value_to_registry(value,registry="a",second_registry="b",third_registry = "c", do_variablearray_memory=False,):
     if type(value) == SimpleVariable:
         code = []
         code.extend(generate_number(value.memory_number, registry,second_registry))
         code.append("LOAD " + registry)
+        
         if registry != "a":
             code.append("SWAP " + registry)
         return code
     elif type(value) == int:
         code = []
         code.extend(generate_number(value, registry, second_registry))
+        return code
+    elif type(value) == VariableOfArray:
+        code = load_value_to_registry(value.array.memory_number, registry, second_registry)
+        #code.append("PUT")
+        code.append("SWAP " + third_registry)
+        code.extend(load_value_to_registry(value.index, registry, second_registry))
+        #code.append("PUT") # a: wartosc simplevariable, c: poczatek tablicy, d: wartosc do przypisania
+        code.append("SWAP " + second_registry)
+        code.append("RESET a")
+        code.append("ADD " + third_registry )
+        code.append("ADD "  + second_registry)
+        #code.append("PUT") #&address tego tu -> tab[index]
+        if not do_variablearray_memory:
+            code.append("LOAD a")
+            #code.append("PUT")
+            '''
+        code.append("PUT") #put a
+        
+        code.append("SWAP b") #put b
+        code.append("PUT")
+        code.append("SWAP b")
+
+        code.append("SWAP c") #put c
+        code.append("PUT")
+        code.append("SWAP c")
+        
+        code.append("SWAP d")#put d
+        code.append("PUT")
+        code.append("SWAP d")
+        '''
         return code
     else: 
         return ["Fuck it"]

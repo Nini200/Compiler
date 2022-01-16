@@ -23,8 +23,6 @@ class Generator:
         for command in self.commands:
             if isinstance(command, BaseCommand):
                 command.generate_code()
-                print (command.code)
                 output_code += "\n".join(command.code) + "\n"
         with open(self.output_file, 'w') as file:
-            print (output_code)
             file.write(output_code)

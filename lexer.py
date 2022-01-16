@@ -77,6 +77,24 @@ t_RB = r'\]'
 t_READ = r'READ'
 t_WRITE = r'WRITE'
 
+# Dealing with comments
+# Starts 'comment' state
+def t_begin_comment(t):
+    r'\('
+    t.lexer.begin('comment')
+    pass
+
+# Ends 'comment' state
+def t_comment_end(t):
+    r'\)'
+    t.lexer.begin('INITIAL')
+    pass
+
+# Annything in 'comment' state do nothing
+def t_comment_any(t):
+    r'.'
+    pass
+
 # Providing value associated wuth the token too
 def t_NUM(t):
     r'[-]?[0-9]+'
@@ -91,21 +109,6 @@ def t_newline(t):
 # To ignore whitespaces
 t_ignore = '  \t'
 
-# Dealing with comments
-# Starts 'comment' state
-def t_begin_comment(t):
-    r'\('
-    t.lexer.begin('comment')
-
-# Ends 'comment' state
-def t_end_comment(t):
-    r'\)'
-    t.lexer.begin('INITIAL')
-
-# Annything in 'comment' state do nothing
-def t_comment_any(t):
-    r'.'
-    pass
 
 def t_error(t) :
     print("Illegal character '%s'" %t.value[0])

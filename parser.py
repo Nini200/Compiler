@@ -33,13 +33,45 @@ def add_variable(pidentifier):
     else:
         get_error("Powtórna deklaracja zmiennej " + pidentifier )
 
+def add_array_of_variables(pid, start, end):
+    global next_memory_number
+    if pid not in variables:
+        try:
+            var = ArrayOfVariables(pid, next_memory_number - start, start, end)
+        except ArrayRangeError:
+            get_error("Nieprawidłowy zakres tablicy")
+        next_memory_number += var.length
+        variables[var.pidentifier] = var
+    else:
+        get_error("Duplikat deklaracji " + pid )
+
 def load_variable(pid):
     if pid not in variables:
         variables_to_check_later.append(pid)
         return pid
-    #if isinstance(variables[pid], ArrayOfVariables):
-        #custom_error("Nieprawidłowe użycie zmiennej " + pid)
+    if isinstance(variables[pid], ArrayOfVariables):
+        get_error("Nieprawidłowe użycie zmiennej " + pid)
     return variables[pid]
+
+def load_variable_from_array(pid, position):
+    if pid not in variables:
+        get_error("Brak deklaracji tablicy " + pid)
+    if type(variables[pid]) == SimpleVariable:
+        get_error("Nieprawidłowe użycie zmiennej " + pid)
+    
+    array = variables[pid]
+        
+    if type(position) == int:
+        try:
+            return array.at_index(position)
+        except IndexError:
+            get_error("Index poza zasięgiem")
+    elif type(position) == str:
+        print (position)
+        position = load_variable(position)
+        print("...................................................................")
+        check_initialization(position)
+        return VariableOfArray(array, position)
 
 def initialize_variable(variable):
     if type(variable) == SimpleVariable:
@@ -48,7 +80,7 @@ def initialize_variable(variable):
 def check_initialization(variable):
     if type(variable) == SimpleVariable:
         if not variable.is_initialized:
-            get_error("Niezadeklarowana zmienna " + variable.pid )
+            get_error("Niezadeklarowana zmienna " + variable.pidentifier )
 
 precedence = (
     ('left', 'PLUS', 'MINUS'),
@@ -61,50 +93,43 @@ precedence = (
 def p_var_begin_end(p):
     '''program : VAR declarations BEGIN commands END'''
     generator = Generator(p[4], variables, next_memory_number, output_file_name)
-    print("In var begin end")
     generator.generate_code()
 
 def p_begin_end(p):
     '''program : BEGIN commands END'''
     generator = Generator(p[4], variables, next_memory_number, output_file_name)
-    print("In begin end")
     generator.generate_code()
 
 # Value rules
 def p_value_num(p):
     '''value : NUM'''
-    print("In value num")
     p[0] = p[1]  # p[1] should be as int
 
 
 def p_value_identifier(p):
     '''value : identifier'''
-    print("In vaalue identifier")
     p[0] = p[1]  # p[1] should be as Variable or str (when unknown variable - maybe iterator)
 
 # Declaration rules
 def p_declarations_pididentifier(p):
     '''declarations : declarations COMMA PIDENTIFIER'''
-    print("In declarations  dec pid")
     add_variable(p[3])
 
 
 def p_declarations_pididentifier_array(p):
     '''declarations : declarations COMMA PIDENTIFIER LB NUM COLON NUM RB'''
-    print("In declarations dec pid arr")
+    add_array_of_variables(p[3], p[5], p[7])
     
 
 
 def p_declare_pididentifier(p):
     '''declarations : PIDENTIFIER'''
-    print("In declarations pid")
     add_variable(p[1])
 
 
 def p_declare_array(p):
     '''declarations : PIDENTIFIER LB NUM COLON NUM RB '''
-    print("In declarations pid arr")
-
+    add_array_of_variables(p[1], p[3], p[5])
     
 # Commands rules    
 def p_commands_commands_command(p):
@@ -124,20 +149,14 @@ def p_command_read(p):
         get_error("Błąd operacji odczytu z: " + p[2])
     elif type(p[2]) == str:
         get_error("Błąd operacji odczytu z: " + p[2])
-    print("In read command")
     initialize_variable(p[2])
     c = ReadCommand(p[2])
-    c.generate_code()
-    print(c.code)
     p[0] = ReadCommand(p[2])
 
 def p_command_write(p):
     '''command : WRITE value SEMICOLON'''
-    print("In write command")
     check_initialization(p[2])
     c = WriteCommand(p[2])
-    c.generate_code()
-    print(c.code)
     p[0] = WriteCommand(p[2])
 
 def p_command_identifier_expression(p):
@@ -175,6 +194,14 @@ def p_identifier_PIDENTIFIER(p):
     '''identifier : PIDENTIFIER'''
     p[0] = load_variable(p[1])
 
+def p_identifier_array_PIDENTIFIER(p):
+    '''identifier : PIDENTIFIER LB PIDENTIFIER RB'''
+    p[0] = load_variable_from_array(p[1], p[3])
+
+def p_identifier_array_num(p):
+    '''identifier : PIDENTIFIER LB NUM RB'''
+    p[0] = load_variable_from_array(p[1], p[3])
+
 
 # Expression rules
 def p_expression_value(p):
@@ -193,6 +220,24 @@ def p_expression_value_minus(p):
     check_initialization(p[1])
     check_initialization(p[3])
     p[0] = SubExpression(p[1], p[3])
+
+def p_expression_value_times(p):
+    '''expression : value TIMES value'''
+    check_initialization(p[1])
+    check_initialization(p[3])
+    p[0] = MulExpression(p[1], p[3])
+
+def p_expression_value_div(p):
+    '''expression : value DIV value'''
+    check_initialization(p[1])
+    check_initialization(p[3])
+    p[0] = DivExpression(p[1], p[3])
+
+def p_expression_value_mod(p):
+    '''expression : value MOD value'''
+    check_initialization(p[1])
+    check_initialization(p[3])
+    p[0] = ModExpression(p[1], p[3])
 
 # Conditions
 def p_condition_le(p):
