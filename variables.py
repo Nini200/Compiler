@@ -39,3 +39,14 @@ class ArrayOfVariables(SimpleVariable):
 
 class ArrayRangeError(Exception):
     pass
+
+class VariableIterator(SimpleVariable):
+
+    def __init__(self, pid, memory_location, start, end):
+        self.pid = pid
+        self.start = start
+        self.end = end
+        self.is_initialized = True
+        self.memory_location = memory_location
+        self.is_in_register = False #used?
+        self.register_location = None #used?

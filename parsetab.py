@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftPLUSMINUSleftDIVTIMESASSIGN BEGIN COLON COMMA DIV DO DOWNTO ELSE END ENDFOR ENDIF ENDWHILE EQ FOR FROM GE GEQ IF LB LE LEQ MINUS MOD NEQ NUM PIDENTIFIER PLUS RB READ REPEAT SEMICOLON THEN TIMES TO UNTIL VAR WHILE WRITEprogram : VAR declarations BEGIN commands ENDprogram : BEGIN commands ENDvalue : NUMvalue : identifierdeclarations : declarations COMMA PIDENTIFIERdeclarations : declarations COMMA PIDENTIFIER LB NUM COLON NUM RBdeclarations : PIDENTIFIERdeclarations : PIDENTIFIER LB NUM COLON NUM RB commands : commands commandcommands : commandcommand : READ identifier SEMICOLONcommand : WRITE value SEMICOLONcommand : identifier ASSIGN expression SEMICOLONcommand : IF condition THEN commands ELSE commands ENDIFcommand : IF condition THEN commands ENDIFcommand : WHILE condition DO commands ENDWHILEcommand : REPEAT commands UNTIL condition SEMICOLONidentifier : PIDENTIFIERexpression : valueexpression : value PLUS valueexpression : value MINUS valuecondition : value LE valuecondition : value GE valuecondition : value LEQ valuecondition : value GEQ valuecondition : value EQ valuecondition : value NEQ value'
+_lr_signature = 'leftPLUSMINUSleftDIVTIMESASSIGN BEGIN COLON COMMA DIV DO DOWNTO ELSE END ENDFOR ENDIF ENDWHILE EQ FOR FROM GE GEQ IF LB LE LEQ MINUS MOD NEQ NUM PIDENTIFIER PLUS RB READ REPEAT SEMICOLON THEN TIMES TO UNTIL VAR WHILE WRITEprogram : VAR declarations BEGIN commands ENDprogram : BEGIN commands ENDvalue : NUMvalue : identifierdeclarations : declarations COMMA PIDENTIFIERdeclarations : declarations COMMA PIDENTIFIER LB NUM COLON NUM RBdeclarations : PIDENTIFIERdeclarations : PIDENTIFIER LB NUM COLON NUM RB commands : commands commandcommands : commandcommand : READ identifier SEMICOLONcommand : WRITE value SEMICOLONcommand : identifier ASSIGN expression SEMICOLONcommand : IF condition THEN commands ELSE commands ENDIFcommand : IF condition THEN commands ENDIFcommand : WHILE condition DO commands ENDWHILEcommand : REPEAT commands UNTIL condition SEMICOLONcommand : FOR PIDENTIFIER FROM value TO value DO commands ENDFORcommand : FOR PIDENTIFIER FROM value DOWNTO value DO commands ENDFORidentifier : PIDENTIFIERidentifier : PIDENTIFIER LB PIDENTIFIER RBidentifier : PIDENTIFIER LB NUM RBexpression : valueexpression : value PLUS valueexpression : value MINUS valueexpression : value TIMES valueexpression : value DIV valueexpression : value MOD valuecondition : value LE valuecondition : value GE valuecondition : value LEQ valuecondition : value GEQ valuecondition : value EQ valuecondition : value NEQ value'
     
-_lr_action_items = {'VAR':([0,],[2,]),'BEGIN':([0,4,5,30,69,73,],[3,15,-7,-5,-8,-6,]),'$end':([1,18,45,],[0,-2,-1,]),'PIDENTIFIER':([2,3,6,7,8,10,11,12,13,15,16,19,21,28,29,32,35,36,37,38,39,40,41,42,43,44,48,49,50,51,58,64,65,66,67,70,72,],[5,14,14,-10,14,14,14,14,14,14,30,-9,14,14,14,-11,-12,14,14,14,14,14,14,14,14,14,-13,14,14,14,14,14,-15,-16,-17,14,-14,]),'READ':([3,6,7,13,15,19,28,29,32,35,36,43,48,51,58,64,65,66,67,70,72,],[8,8,-10,8,8,-9,8,8,-11,-12,8,8,-13,8,8,8,-15,-16,-17,8,-14,]),'WRITE':([3,6,7,13,15,19,28,29,32,35,36,43,48,51,58,64,65,66,67,70,72,],[10,10,-10,10,10,-9,10,10,-11,-12,10,10,-13,10,10,10,-15,-16,-17,10,-14,]),'IF':([3,6,7,13,15,19,28,29,32,35,36,43,48,51,58,64,65,66,67,70,72,],[11,11,-10,11,11,-9,11,11,-11,-12,11,11,-13,11,11,11,-15,-16,-17,11,-14,]),'WHILE':([3,6,7,13,15,19,28,29,32,35,36,43,48,51,58,64,65,66,67,70,72,],[12,12,-10,12,12,-9,12,12,-11,-12,12,12,-13,12,12,12,-15,-16,-17,12,-14,]),'REPEAT':([3,6,7,13,15,19,28,29,32,35,36,43,48,51,58,64,65,66,67,70,72,],[13,13,-10,13,13,-9,13,13,-11,-12,13,13,-13,13,13,13,-15,-16,-17,13,-14,]),'COMMA':([4,5,30,69,73,],[16,-7,-5,-8,-6,]),'LB':([5,30,],[17,46,]),'END':([6,7,19,29,32,35,48,65,66,67,72,],[18,-10,-9,45,-11,-12,-13,-15,-16,-17,-14,]),'UNTIL':([7,19,28,32,35,48,65,66,67,72,],[-10,-9,44,-11,-12,-13,-15,-16,-17,-14,]),'ELSE':([7,19,32,35,48,51,65,66,67,72,],[-10,-9,-11,-12,-13,64,-15,-16,-17,-14,]),'ENDIF':([7,19,32,35,48,51,65,66,67,70,72,],[-10,-9,-11,-12,-13,65,-15,-16,-17,72,-14,]),'ENDWHILE':([7,19,32,35,48,58,65,66,67,72,],[-10,-9,-11,-12,-13,66,-15,-16,-17,-14,]),'ASSIGN':([9,14,],[21,-18,]),'NUM':([10,11,12,17,21,37,38,39,40,41,42,44,46,47,49,50,68,],[23,23,23,31,23,23,23,23,23,23,23,23,60,61,23,23,71,]),'SEMICOLON':([14,20,22,23,24,33,34,52,53,54,55,56,57,59,62,63,],[-18,32,35,-3,-4,48,-19,-22,-23,-24,-25,-26,-27,67,-20,-21,]),'LE':([14,23,24,26,],[-18,-3,-4,37,]),'GE':([14,23,24,26,],[-18,-3,-4,38,]),'LEQ':([14,23,24,26,],[-18,-3,-4,39,]),'GEQ':([14,23,24,26,],[-18,-3,-4,40,]),'EQ':([14,23,24,26,],[-18,-3,-4,41,]),'NEQ':([14,23,24,26,],[-18,-3,-4,42,]),'PLUS':([14,23,24,34,],[-18,-3,-4,49,]),'MINUS':([14,23,24,34,],[-18,-3,-4,50,]),'THEN':([14,23,24,25,52,53,54,55,56,57,],[-18,-3,-4,36,-22,-23,-24,-25,-26,-27,]),'DO':([14,23,24,27,52,53,54,55,56,57,],[-18,-3,-4,43,-22,-23,-24,-25,-26,-27,]),'COLON':([31,60,],[47,68,]),'RB':([61,71,],[69,73,]),}
+_lr_action_items = {'VAR':([0,],[2,]),'BEGIN':([0,4,5,33,86,94,],[3,16,-7,-5,-8,-6,]),'$end':([1,19,51,],[0,-2,-1,]),'PIDENTIFIER':([2,3,6,7,8,10,11,12,13,14,16,17,20,22,29,31,32,35,38,39,40,41,42,43,44,45,46,47,48,54,55,56,57,58,59,60,67,79,80,81,82,83,84,87,91,92,93,95,96,97,98,],[5,15,15,-10,15,15,15,15,15,30,15,33,-9,15,15,49,15,-11,-12,15,15,15,15,15,15,15,15,15,15,-13,15,15,15,15,15,15,15,15,-15,-16,-17,15,15,15,-14,15,15,15,15,-18,-19,]),'READ':([3,6,7,13,16,20,29,32,35,38,39,46,54,60,67,79,80,81,82,87,91,92,93,95,96,97,98,],[8,8,-10,8,8,-9,8,8,-11,-12,8,8,-13,8,8,8,-15,-16,-17,8,-14,8,8,8,8,-18,-19,]),'WRITE':([3,6,7,13,16,20,29,32,35,38,39,46,54,60,67,79,80,81,82,87,91,92,93,95,96,97,98,],[10,10,-10,10,10,-9,10,10,-11,-12,10,10,-13,10,10,10,-15,-16,-17,10,-14,10,10,10,10,-18,-19,]),'IF':([3,6,7,13,16,20,29,32,35,38,39,46,54,60,67,79,80,81,82,87,91,92,93,95,96,97,98,],[11,11,-10,11,11,-9,11,11,-11,-12,11,11,-13,11,11,11,-15,-16,-17,11,-14,11,11,11,11,-18,-19,]),'WHILE':([3,6,7,13,16,20,29,32,35,38,39,46,54,60,67,79,80,81,82,87,91,92,93,95,96,97,98,],[12,12,-10,12,12,-9,12,12,-11,-12,12,12,-13,12,12,12,-15,-16,-17,12,-14,12,12,12,12,-18,-19,]),'REPEAT':([3,6,7,13,16,20,29,32,35,38,39,46,54,60,67,79,80,81,82,87,91,92,93,95,96,97,98,],[13,13,-10,13,13,-9,13,13,-11,-12,13,13,-13,13,13,13,-15,-16,-17,13,-14,13,13,13,13,-18,-19,]),'FOR':([3,6,7,13,16,20,29,32,35,38,39,46,54,60,67,79,80,81,82,87,91,92,93,95,96,97,98,],[14,14,-10,14,14,-9,14,14,-11,-12,14,14,-13,14,14,14,-15,-16,-17,14,-14,14,14,14,14,-18,-19,]),'COMMA':([4,5,33,86,94,],[17,-7,-5,-8,-6,]),'LB':([5,15,33,],[18,31,52,]),'END':([6,7,20,32,35,38,54,80,81,82,91,97,98,],[19,-10,-9,51,-11,-12,-13,-15,-16,-17,-14,-18,-19,]),'UNTIL':([7,20,29,35,38,54,80,81,82,91,97,98,],[-10,-9,47,-11,-12,-13,-15,-16,-17,-14,-18,-19,]),'ELSE':([7,20,35,38,54,60,80,81,82,91,97,98,],[-10,-9,-11,-12,-13,79,-15,-16,-17,-14,-18,-19,]),'ENDIF':([7,20,35,38,54,60,80,81,82,87,91,97,98,],[-10,-9,-11,-12,-13,80,-15,-16,-17,91,-14,-18,-19,]),'ENDWHILE':([7,20,35,38,54,67,80,81,82,91,97,98,],[-10,-9,-11,-12,-13,81,-15,-16,-17,-14,-18,-19,]),'ENDFOR':([7,20,35,38,54,80,81,82,91,95,96,97,98,],[-10,-9,-11,-12,-13,-15,-16,-17,-14,97,98,-18,-19,]),'ASSIGN':([9,15,70,71,],[22,-20,-21,-22,]),'NUM':([10,11,12,18,22,31,40,41,42,43,44,45,47,48,52,53,55,56,57,58,59,83,84,85,],[24,24,24,34,24,50,24,24,24,24,24,24,24,24,72,73,24,24,24,24,24,24,24,90,]),'SEMICOLON':([15,21,23,24,25,36,37,61,62,63,64,65,66,68,70,71,74,75,76,77,78,],[-20,35,38,-3,-4,54,-23,-29,-30,-31,-32,-33,-34,82,-21,-22,-24,-25,-26,-27,-28,]),'LE':([15,24,25,27,70,71,],[-20,-3,-4,40,-21,-22,]),'GE':([15,24,25,27,70,71,],[-20,-3,-4,41,-21,-22,]),'LEQ':([15,24,25,27,70,71,],[-20,-3,-4,42,-21,-22,]),'GEQ':([15,24,25,27,70,71,],[-20,-3,-4,43,-21,-22,]),'EQ':([15,24,25,27,70,71,],[-20,-3,-4,44,-21,-22,]),'NEQ':([15,24,25,27,70,71,],[-20,-3,-4,45,-21,-22,]),'PLUS':([15,24,25,37,70,71,],[-20,-3,-4,55,-21,-22,]),'MINUS':([15,24,25,37,70,71,],[-20,-3,-4,56,-21,-22,]),'TIMES':([15,24,25,37,70,71,],[-20,-3,-4,57,-21,-22,]),'DIV':([15,24,25,37,70,71,],[-20,-3,-4,58,-21,-22,]),'MOD':([15,24,25,37,70,71,],[-20,-3,-4,59,-21,-22,]),'THEN':([15,24,25,26,61,62,63,64,65,66,70,71,],[-20,-3,-4,39,-29,-30,-31,-32,-33,-34,-21,-22,]),'DO':([15,24,25,28,61,62,63,64,65,66,70,71,88,89,],[-20,-3,-4,46,-29,-30,-31,-32,-33,-34,-21,-22,92,93,]),'TO':([15,24,25,69,70,71,],[-20,-3,-4,83,-21,-22,]),'DOWNTO':([15,24,25,69,70,71,],[-20,-3,-4,84,-21,-22,]),'FROM':([30,],[48,]),'COLON':([34,72,],[53,85,]),'RB':([49,50,73,90,],[70,71,86,94,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'declarations':([2,],[4,]),'commands':([3,13,15,36,43,64,],[6,28,29,51,58,70,]),'command':([3,6,13,15,28,29,36,43,51,58,64,70,],[7,19,7,7,19,19,7,7,19,19,7,19,]),'identifier':([3,6,8,10,11,12,13,15,21,28,29,36,37,38,39,40,41,42,43,44,49,50,51,58,64,70,],[9,9,20,24,24,24,9,9,24,9,9,9,24,24,24,24,24,24,9,24,24,24,9,9,9,9,]),'value':([10,11,12,21,37,38,39,40,41,42,44,49,50,],[22,26,26,34,52,53,54,55,56,57,26,62,63,]),'condition':([11,12,44,],[25,27,59,]),'expression':([21,],[33,]),}
+_lr_goto_items = {'program':([0,],[1,]),'declarations':([2,],[4,]),'commands':([3,13,16,39,46,79,92,93,],[6,29,32,60,67,87,95,96,]),'command':([3,6,13,16,29,32,39,46,60,67,79,87,92,93,95,96,],[7,20,7,7,20,20,7,7,20,20,7,20,7,7,20,20,]),'identifier':([3,6,8,10,11,12,13,16,22,29,32,39,40,41,42,43,44,45,46,47,48,55,56,57,58,59,60,67,79,83,84,87,92,93,95,96,],[9,9,21,25,25,25,9,9,25,9,9,9,25,25,25,25,25,25,9,25,25,25,25,25,25,25,9,9,9,25,25,9,9,9,9,9,]),'value':([10,11,12,22,40,41,42,43,44,45,47,48,55,56,57,58,59,83,84,],[23,27,27,37,61,62,63,64,65,66,27,69,74,75,76,77,78,88,89,]),'condition':([11,12,47,],[26,28,68,]),'expression':([22,],[36,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,31 +27,38 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> VAR declarations BEGIN commands END','program',5,'p_var_begin_end','parser.py',62),
-  ('program -> BEGIN commands END','program',3,'p_begin_end','parser.py',68),
-  ('value -> NUM','value',1,'p_value_num','parser.py',75),
-  ('value -> identifier','value',1,'p_value_identifier','parser.py',81),
-  ('declarations -> declarations COMMA PIDENTIFIER','declarations',3,'p_declarations_pididentifier','parser.py',87),
-  ('declarations -> declarations COMMA PIDENTIFIER LB NUM COLON NUM RB','declarations',8,'p_declarations_pididentifier_array','parser.py',93),
-  ('declarations -> PIDENTIFIER','declarations',1,'p_declare_pididentifier','parser.py',99),
-  ('declarations -> PIDENTIFIER LB NUM COLON NUM RB','declarations',6,'p_declare_array','parser.py',105),
-  ('commands -> commands command','commands',2,'p_commands_commands_command','parser.py',111),
-  ('commands -> command','commands',1,'p_commands_command','parser.py',117),
-  ('command -> READ identifier SEMICOLON','command',3,'p_command_read','parser.py',122),
-  ('command -> WRITE value SEMICOLON','command',3,'p_command_write','parser.py',135),
-  ('command -> identifier ASSIGN expression SEMICOLON','command',4,'p_command_identifier_expression','parser.py',144),
-  ('command -> IF condition THEN commands ELSE commands ENDIF','command',7,'p_command_if_then_else','parser.py',154),
-  ('command -> IF condition THEN commands ENDIF','command',5,'p_command_if_then','parser.py',159),
-  ('command -> WHILE condition DO commands ENDWHILE','command',5,'p_command_while_do','parser.py',164),
-  ('command -> REPEAT commands UNTIL condition SEMICOLON','command',5,'p_command_repeat_until','parser.py',169),
-  ('identifier -> PIDENTIFIER','identifier',1,'p_identifier_PIDENTIFIER','parser.py',175),
-  ('expression -> value','expression',1,'p_expression_value','parser.py',181),
-  ('expression -> value PLUS value','expression',3,'p_expression_value_plus','parser.py',186),
-  ('expression -> value MINUS value','expression',3,'p_expression_value_minus','parser.py',192),
-  ('condition -> value LE value','condition',3,'p_condition_le','parser.py',199),
-  ('condition -> value GE value','condition',3,'p_condition_ge','parser.py',203),
-  ('condition -> value LEQ value','condition',3,'p_condition_leq','parser.py',208),
-  ('condition -> value GEQ value','condition',3,'p_condition_geq','parser.py',213),
-  ('condition -> value EQ value','condition',3,'p_condition_eq','parser.py',217),
-  ('condition -> value NEQ value','condition',3,'p_condition_neq','parser.py',221),
+  ('program -> VAR declarations BEGIN commands END','program',5,'p_var_begin_end','parser.py',92),
+  ('program -> BEGIN commands END','program',3,'p_begin_end','parser.py',97),
+  ('value -> NUM','value',1,'p_value_num','parser.py',103),
+  ('value -> identifier','value',1,'p_value_identifier','parser.py',108),
+  ('declarations -> declarations COMMA PIDENTIFIER','declarations',3,'p_declarations_pididentifier','parser.py',113),
+  ('declarations -> declarations COMMA PIDENTIFIER LB NUM COLON NUM RB','declarations',8,'p_declarations_pididentifier_array','parser.py',118),
+  ('declarations -> PIDENTIFIER','declarations',1,'p_declare_pididentifier','parser.py',124),
+  ('declarations -> PIDENTIFIER LB NUM COLON NUM RB','declarations',6,'p_declare_array','parser.py',129),
+  ('commands -> commands command','commands',2,'p_commands_commands_command','parser.py',134),
+  ('commands -> command','commands',1,'p_commands_command','parser.py',140),
+  ('command -> READ identifier SEMICOLON','command',3,'p_command_read','parser.py',145),
+  ('command -> WRITE value SEMICOLON','command',3,'p_command_write','parser.py',155),
+  ('command -> identifier ASSIGN expression SEMICOLON','command',4,'p_command_identifier_expression','parser.py',161),
+  ('command -> IF condition THEN commands ELSE commands ENDIF','command',7,'p_command_if_then_else','parser.py',171),
+  ('command -> IF condition THEN commands ENDIF','command',5,'p_command_if_then','parser.py',176),
+  ('command -> WHILE condition DO commands ENDWHILE','command',5,'p_command_while_do','parser.py',181),
+  ('command -> REPEAT commands UNTIL condition SEMICOLON','command',5,'p_command_repeat_until','parser.py',186),
+  ('command -> FOR PIDENTIFIER FROM value TO value DO commands ENDFOR','command',9,'p_command_for_from_to_do','parser.py',190),
+  ('command -> FOR PIDENTIFIER FROM value DOWNTO value DO commands ENDFOR','command',9,'p_command_for_from_downto_do','parser.py',198),
+  ('identifier -> PIDENTIFIER','identifier',1,'p_identifier_PIDENTIFIER','parser.py',208),
+  ('identifier -> PIDENTIFIER LB PIDENTIFIER RB','identifier',4,'p_identifier_array_PIDENTIFIER','parser.py',212),
+  ('identifier -> PIDENTIFIER LB NUM RB','identifier',4,'p_identifier_array_num','parser.py',216),
+  ('expression -> value','expression',1,'p_expression_value','parser.py',222),
+  ('expression -> value PLUS value','expression',3,'p_expression_value_plus','parser.py',227),
+  ('expression -> value MINUS value','expression',3,'p_expression_value_minus','parser.py',233),
+  ('expression -> value TIMES value','expression',3,'p_expression_value_times','parser.py',239),
+  ('expression -> value DIV value','expression',3,'p_expression_value_div','parser.py',245),
+  ('expression -> value MOD value','expression',3,'p_expression_value_mod','parser.py',251),
+  ('condition -> value LE value','condition',3,'p_condition_le','parser.py',258),
+  ('condition -> value GE value','condition',3,'p_condition_ge','parser.py',262),
+  ('condition -> value LEQ value','condition',3,'p_condition_leq','parser.py',267),
+  ('condition -> value GEQ value','condition',3,'p_condition_geq','parser.py',272),
+  ('condition -> value EQ value','condition',3,'p_condition_eq','parser.py',276),
+  ('condition -> value NEQ value','condition',3,'p_condition_neq','parser.py',280),
 ]

@@ -67,9 +67,7 @@ def load_variable_from_array(pid, position):
         except IndexError:
             get_error("Index poza zasięgiem")
     elif type(position) == str:
-        print (position)
         position = load_variable(position)
-        print("...................................................................")
         check_initialization(position)
         return VariableOfArray(array, position)
 
@@ -187,6 +185,22 @@ def p_command_while_do(p):
 def p_command_repeat_until(p):
     '''command : REPEAT commands UNTIL condition SEMICOLON'''
     p[0] = RepeatCommand(p[4], p[2])
+
+def p_command_for_from_to_do(p):
+    '''command : FOR PIDENTIFIER FROM value TO value DO commands ENDFOR'''
+    while p[2] in variables_to_check_later:
+        variables_to_check_later.remove(p[2])
+    check_initialization(p[4])
+    check_initialization(p[6])
+    p[0] = ForCommand(p[2], p[4], p[6], p[8])
+
+def p_command_for_from_downto_do(p):
+    '''command : FOR PIDENTIFIER FROM value DOWNTO value DO commands ENDFOR'''
+    while p[2] in variables_to_check_later:
+        variables_to_check_later.remove(p[2])
+    check_initialization(p[4])
+    check_initialization(p[6])
+    p[0] = ForDownCommand(p[2], p[4], p[6], p[8])
 
 
 # Identifiers

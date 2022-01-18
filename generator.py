@@ -2,7 +2,7 @@ from commands import *
 
 class Generator:
     variables = {}
-    #iterators ={}
+    iterators = []
     next_memory = 0
 
     def __init__(self) -> None:
